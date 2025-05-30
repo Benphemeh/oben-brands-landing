@@ -107,7 +107,7 @@ export default function HomePage() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center space-x-2">
                     <div className="text-2xl">🐷</div>
-                    <h3 className="text-2xl font-bold text-green-700">Onimuelede – Pigs & Pork</h3>
+                    <h3 className="text-2xl font-bold text-green-700">Onimuelede  Pigs & Pork</h3>
                   </div>
                   <ul className="space-y-2">
                     <li className="flex items-center space-x-2">
@@ -336,65 +336,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Delivery Info
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-              <div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800 mb-6">
-                  Delivery Info & Service Areas
-                </h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">We Deliver to:</h3>
-                    <ul className="space-y-1">
-                      <li className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-green-600" />
-                        <span>Lagos</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-green-600" />
-                        <span>Ogun State</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-green-600" />
-                        <span>Surrounding areas on request</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Timeframe:</h3>
-                    <ul className="space-y-1">
-                      <li className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4 text-green-600" />
-                        <span>Orders placed before 12pm are delivered same-day</span>
-                      </li>
-                      <li className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4 text-green-600" />
-                        <span>Next-day delivery available for all others</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Pickup Option:</h3>
-                <div className="space-y-2">
-                  <p>
-                    <strong>Lagos Location:</strong> 1, Obadiah Street Ilaje Bariga, Lagos
-                  </p>
-                  <p>
-                    <strong>Abeokuta Location:</strong> Plot 3, Boundary Estate Shoyooye Abeokuta
-                  </p>
-                  <p>
-                    <strong>Pickup Hours:</strong> Mon–Sat, 9am–5pm
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
-
         {/* CTA Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-green-600 text-white">
           <div className="container px-4 md:px-6">
@@ -460,6 +401,19 @@ export default function HomePage() {
         <section id="contact" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
+              
+              <div id="about">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800 mb-6">
+                  About O'Ben Brands
+                </h2>
+                <p className="text-gray-600 mb-4">
+                    We are more than just a marketplace — we’re your trusted partner for premium pigs, fresh pork, and daily provisions. 
+                With a passion for quality and a heart for community, we connect local farms to your table through ethical sourcing, clean processing, 
+               and fast delivery. Whether you're planning a family celebration or stocking up, we make fresh food simple, safe, 
+              and accessible. We serve homes and businesses across Lagos, Ogun, and beyond with products you can trust and service you'll love.
+                </p>
+                <p className="text-green-700 font-semibold">Trusted by families, loved by cooks.</p>
+              </div>
               <div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800 mb-6">
                   Contact & Support
@@ -484,18 +438,6 @@ export default function HomePage() {
                     </Button>
                   </div>
                 </div>
-              </div>
-              <div id="about">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800 mb-6">
-                  About O'Ben Brands
-                </h2>
-                <p className="text-gray-600 mb-4">
-                   At O'Ben Brands, we’re more than just a marketplace — we’re your trusted partner for premium pigs, fresh pork, and daily provisions. 
-  With a passion for quality and a heart for community, we connect local farms to your table through ethical sourcing, clean processing, 
-  and fast delivery. Whether you're planning a family celebration or stocking up, we make fresh food simple, safe, 
-  and accessible. We serve homes and businesses across Lagos, Ogun, and beyond with products you can trust and service you'll love.
-                </p>
-                <p className="text-green-700 font-semibold">Trusted by families, loved by cooks.</p>
               </div>
             </div>
           </div>
