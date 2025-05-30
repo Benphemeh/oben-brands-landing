@@ -335,7 +335,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Delivery Info */}
+        {/* Delivery Info
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
@@ -392,7 +392,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-green-600 text-white">
@@ -419,7 +419,7 @@ export default function HomePage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800">
-                Get ₦500 off your first order!
+                Get up to 50% off your first order!
               </h2>
               <p className="max-w-[600px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Join our community for deals, tips, and farm updates.
@@ -445,7 +445,7 @@ export default function HomePage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800">
-                Prefer chatting? Order easily on WhatsApp 👇
+                Prefer chatting? Order easily on WhatsApp
               </h2>
               <Button size="lg" className="bg-green-500 hover:bg-green-600">
                 <MessageCircle className="w-4 h-4 mr-2" />
@@ -466,7 +466,7 @@ export default function HomePage() {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Phone className="w-5 h-5 text-green-600" />
-                    <span>07037983163</span>
+                    <span>+2347037983163</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Mail className="w-5 h-5 text-green-600" />
@@ -489,8 +489,10 @@ export default function HomePage() {
                   About O'Ben Brands
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  At O'Ben Brands, we believe fresh is best. From farm to table, we offer live pigs, quality pork, and
-                  everyday essentials through ethical farming, efficient delivery, and community-first service.
+                   At O'Ben Brands, we’re more than just a marketplace — we’re your trusted partner for premium pigs, fresh pork, and daily provisions. 
+  With a passion for quality and a heart for community, we connect local farms to your table through ethical sourcing, clean processing, 
+  and fast delivery. Whether you're planning a family celebration or stocking up, we make fresh food simple, safe, 
+  and accessible. We serve homes and businesses across Lagos, Ogun, and beyond with products you can trust and service you'll love.
                 </p>
                 <p className="text-green-700 font-semibold">Trusted by families, loved by cooks.</p>
               </div>
