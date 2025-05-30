@@ -85,47 +85,12 @@ export default function HomePage() {
               </div>
               <div className="flex items-center justify-center">
                 <Image
-                  src="/placeholder.svg?height=400&width=600"
+                  src="/StockCake-Pigs in Field_1748603740.jpg"
                   width="600"
                   height="400"
                   alt="Fresh pork and provisions"
                   className="mx-auto aspect-video overflow-hidden rounded-xl object-cover"
                 />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works */}
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">How It Works</h2>
-              <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Simple steps to get fresh pork and provisions delivered to your door
-              </p>
-            </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-                  <ShoppingCart className="h-10 w-10 text-green-600" />
-                </div>
-                <h3 className="text-xl font-bold">1. Browse Products</h3>
-                <p className="text-gray-600">Live pigs, pork, provisions, foodstuff, drinks & more</p>
-              </div>
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-                  <Package className="h-10 w-10 text-green-600" />
-                </div>
-                <h3 className="text-xl font-bold">2. Place Your Order</h3>
-                <p className="text-gray-600">Easy checkout. Choose delivery or pickup.</p>
-              </div>
-              <div className="flex flex-col items-center space-y-4 text-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-                  <Truck className="h-10 w-10 text-green-600" />
-                </div>
-                <h3 className="text-xl font-bold">3. Get Fast Delivery</h3>
-                <p className="text-gray-600">We deliver fresh and on time — always.</p>
               </div>
             </div>
           </div>
@@ -194,6 +159,42 @@ export default function HomePage() {
           </div>
         </section>
 
+
+        {/* How It Works */}
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">How It Works</h2>
+              <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Simple steps to get fresh pork and provisions delivered to your door
+              </p>
+            </div>
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
+              <div className="flex flex-col items-center space-y-4 text-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
+                  <ShoppingCart className="h-10 w-10 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold">1. Browse Products</h3>
+                <p className="text-gray-600">Live pigs, pork, provisions, foodstuff, drinks & more</p>
+              </div>
+              <div className="flex flex-col items-center space-y-4 text-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
+                  <Package className="h-10 w-10 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold">2. Place Your Order</h3>
+                <p className="text-gray-600">Easy checkout. Choose delivery or pickup.</p>
+              </div>
+              <div className="flex flex-col items-center space-y-4 text-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
+                  <Truck className="h-10 w-10 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold">3. Get Fast Delivery</h3>
+                <p className="text-gray-600">We deliver fresh and on time — always.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Featured Products */}
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
@@ -203,7 +204,7 @@ export default function HomePage() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <Card className="overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=200&width=300"
+                  src="/IMG_8980.JPG?height=200&width=300"
                   width="300"
                   height="200"
                   alt="Live Pig"
@@ -220,7 +221,7 @@ export default function HomePage() {
               </Card>
               <Card className="overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=200&width=300"
+                  src="/Pork-Chops-2.webp?height=200&width=300"
                   width="300"
                   height="200"
                   alt="Fresh Pork"
@@ -237,7 +238,7 @@ export default function HomePage() {
               </Card>
               <Card className="overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=200&width=300"
+                  src="/provisions.png?height=200&width=300"
                   width="300"
                   height="200"
                   alt="Weekend Kitchen Pack"
