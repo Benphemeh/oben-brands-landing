@@ -107,7 +107,7 @@ export default function HomePage() {
                 <CardContent className="space-y-4">
                   <div className="flex items-center space-x-2">
                     <div className="text-2xl">🐷</div>
-                    <h3 className="text-2xl font-bold text-green-700">Onimuelede  Pigs & Pork</h3>
+                    <h3 className="text-2xl font-bold text-green-700">Onimuelede   Pigs & Pork</h3>
                   </div>
                   <ul className="space-y-2">
                     <li className="flex items-center space-x-2">
