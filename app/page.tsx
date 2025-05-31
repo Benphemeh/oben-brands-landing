@@ -13,8 +13,6 @@ import {
   Phone,
   Mail,
   MessageCircle,
-  MapPin,
-  Clock,
   Users,
   Shield,
   Leaf,

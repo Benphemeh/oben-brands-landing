@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Oben-brands App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'O’Ben Brands | Fresh Porks & Provisions',
+  description: 'Farm-fresh meat and everyday essentials delivered to your doorstep.',
+  generator: 'Next.js',
 }
 
 export default function RootLayout({
