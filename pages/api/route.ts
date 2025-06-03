@@ -1,25 +1,23 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextResponse } from 'next/server'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
+export async function POST(req: Request) {
   const apiKey = process.env.OPENAI_API_KEY
+
   if (!apiKey) {
-    return res.status(500).json({ error: 'Missing OpenAI API key' })
+    return NextResponse.json({ error: 'Missing OpenAI API key' }, { status: 500 })
   }
 
-  const { message } = req.body
+  const { message } = await req.json()
+
   if (!message || typeof message !== 'string') {
-    return res.status(400).json({ error: 'Invalid message' })
+    return NextResponse.json({ error: 'Invalid message' }, { status: 400 })
   }
 
   try {
     const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -31,9 +29,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const data = await openaiRes.json()
     const reply = data.choices?.[0]?.message?.content || 'No reply'
 
-    return res.status(200).json({ reply })
+    return NextResponse.json({ reply })
   } catch (error) {
     console.error('OpenAI error:', error)
-    return res.status(500).json({ error: 'OpenAI API request failed' })
+    return NextResponse.json({ error: 'OpenAI API request failed' }, { status: 500 })
   }
 }
