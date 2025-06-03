@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -17,9 +20,44 @@ import {
   Shield,
   Leaf,
   Heart,
+  Bot,
+  Send,
 } from "lucide-react"
 
 export default function HomePage() {
+
+  // Chat functionality
+  const [input, setInput] = useState('')
+  const [reply, setReply] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [showChat, setShowChat] = useState(false)
+
+  const handleSend = async () => {
+    if (!input.trim()) return;
+    
+    setLoading(true)
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: input }),
+      })
+
+      const data = await res.json()
+      setReply(data.reply)
+    } catch (error) {
+      setReply('Sorry, there was an error processing your request. Please try again.')
+    }
+    setLoading(false)
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSend()
+    }
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
@@ -39,6 +77,13 @@ export default function HomePage() {
             <Link href="#contact" className="text-sm font-medium hover:text-green-600 transition-colors">
               Contact
             </Link>
+            <button 
+              onClick={() => setShowChat(!showChat)}
+              className="text-sm font-medium hover:text-green-600 transition-colors flex items-center space-x-1"
+            >
+              <Bot className="w-4 h-4" />
+              <span>AI Assistant</span>
+            </button>
           </nav>
           <div className="flex items-center space-x-2">
             <Button variant="outline" size="sm" className="hidden sm:flex">
