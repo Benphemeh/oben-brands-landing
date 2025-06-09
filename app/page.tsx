@@ -193,7 +193,7 @@ export default function HomePage() {
                       Browse Products
                     </Button>
                     <Button variant="outline" size="lg" className="bg-green-500 text-white hover:bg-green-600">
-                      <MessageCircle className="w-4 h-4 mr-2" />
+                      <MessageCircle className="w-4 h-4 mr-2"/>
                       WhatsApp Us
                     </Button>
                   </div>
