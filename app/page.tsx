@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   ShoppingCart,
   Package,
@@ -24,63 +24,65 @@ import {
   Send,
   X,
   Menu,
-} from "lucide-react"
+} from "lucide-react";
 
 export default function HomePage() {
   // Chat functionality
-  const [input, setInput] = useState('')
-  const [reply, setReply] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [showChat, setShowChat] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [input, setInput] = useState("");
+  const [reply, setReply] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleChatToggle = () => {
-    console.log('Chat toggle clicked, current showChat:', showChat)
-    setShowChat(!showChat)
-    console.log('Chat will be:', !showChat)
-  }
+    console.log("Chat toggle clicked, current showChat:", showChat);
+    setShowChat(!showChat);
+    console.log("Chat will be:", !showChat);
+  };
 
   const handleSend = async () => {
     if (!input.trim()) return;
-    
-    setLoading(true)
-    console.log('Sending message:', input)
-    
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
-      })
 
-      console.log('Response status:', res.status)
+    setLoading(true);
+    console.log("Sending message:", input);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input }),
+      });
+
+      console.log("Response status:", res.status);
 
       if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`)
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
 
-      const data = await res.json()
-      console.log('Response data:', data)
-      
+      const data = await res.json();
+      console.log("Response data:", data);
+
       if (data.error) {
-        throw new Error(data.error)
+        throw new Error(data.error);
       }
-      
-      setReply(data.reply)
-      setInput('')
+
+      setReply(data.reply);
+      setInput("");
     } catch (error) {
-      console.error('Chat error:', error)
-      setReply('Sorry, there was an error processing your request. Please try again or contact us via WhatsApp at +2347037983163.')
+      console.error("Chat error:", error);
+      setReply(
+        "Sorry, there was an error processing your request. Please try again or contact us via WhatsApp at +2347037983163."
+      );
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSend()
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
     }
-  }
+  };
 
   return (
     <>
@@ -89,28 +91,49 @@ export default function HomePage() {
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container flex h-16 items-center justify-between px-4">
             <div className="flex items-center space-x-2">
-              <Image src="/oben-logo.png" alt="O'Ben Brands Logo" width={40} height={40} className="rounded-full" />
-              <span className="text-xl font-bold text-green-700">O'Ben Brands</span>
+              <Image
+                src="/oben-logo.png"
+                alt="O'Ben Brands Logo"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <span className="text-xl font-bold text-green-700">
+                O'Ben Brands
+              </span>
             </div>
-            
+
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
-              <Link href="#products" className="text-sm font-medium hover:text-green-600 transition-colors">
+              <Link
+                href="#products"
+                className="text-sm font-medium hover:text-green-600 transition-colors"
+              >
                 Products
               </Link>
-              <Link href="#about" className="text-sm font-medium hover:text-green-600 transition-colors">
+              <Link
+                href="#about"
+                className="text-sm font-medium hover:text-green-600 transition-colors"
+              >
                 About
               </Link>
-              <Link href="#contact" className="text-sm font-medium hover:text-green-600 transition-colors">
+              <Link
+                href="#contact"
+                className="text-sm font-medium hover:text-green-600 transition-colors"
+              >
                 Contact
               </Link>
-              <button 
+              <button
                 onClick={handleChatToggle}
                 className="text-sm font-medium hover:text-green-600 transition-colors flex items-center space-x-1 bg-green-50 hover:bg-green-100 px-3 py-2 rounded-md border border-green-200"
               >
                 <Bot className="w-4 h-4" />
                 <span>AI Assistant</span>
-                {showChat && <span className="text-xs bg-green-600 text-white px-1 rounded">ON</span>}
+                {showChat && (
+                  <span className="text-xs bg-green-600 text-white px-1 rounded">
+                    ON
+                  </span>
+                )}
               </button>
             </nav>
 
@@ -127,13 +150,13 @@ export default function HomePage() {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center space-x-2">
-              <button 
+              <button
                 onClick={handleChatToggle}
                 className="text-green-600 hover:text-green-700 p-2 rounded-md border border-green-200"
               >
                 <Bot className="w-5 h-5" />
               </button>
-              <button 
+              <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="text-gray-600 hover:text-gray-700"
               >
@@ -146,13 +169,22 @@ export default function HomePage() {
           {mobileMenuOpen && (
             <div className="md:hidden border-t bg-white">
               <div className="container px-4 py-4 space-y-3">
-                <Link href="#products" className="block text-sm font-medium text-gray-600 hover:text-green-600">
+                <Link
+                  href="#products"
+                  className="block text-sm font-medium text-gray-600 hover:text-green-600"
+                >
                   Products
                 </Link>
-                <Link href="#about" className="block text-sm font-medium text-gray-600 hover:text-green-600">
+                <Link
+                  href="#about"
+                  className="block text-sm font-medium text-gray-600 hover:text-green-600"
+                >
                   About
                 </Link>
-                <Link href="#contact" className="block text-sm font-medium text-gray-600 hover:text-green-600">
+                <Link
+                  href="#contact"
+                  className="block text-sm font-medium text-gray-600 hover:text-green-600"
+                >
                   Contact
                 </Link>
                 <div className="flex space-x-2 pt-2">
@@ -160,7 +192,10 @@ export default function HomePage() {
                     <MessageCircle className="w-4 h-4 mr-2" />
                     WhatsApp
                   </Button>
-                  <Button size="sm" className="bg-green-600 hover:bg-green-700 flex-1">
+                  <Button
+                    size="sm"
+                    className="bg-green-600 hover:bg-green-700 flex-1"
+                  >
                     Shop Now
                   </Button>
                 </div>
@@ -180,19 +215,27 @@ export default function HomePage() {
                       Your Trusted Source for Pigs, Pork & Provisions
                     </h1>
                     <p className="max-w-[600px] text-gray-600 md:text-xl">
-                      Farm-fresh. Traceable. Delivered to your door. Quality pork and everyday essentials from ethical
-                      farming practices.
+                      Farm-fresh. Traceable. Delivered to your door. Quality
+                      pork and everyday essentials from ethical farming
+                      practices.
                     </p>
                   </div>
                   <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                    <Button size="lg" className="bg-green-600 hover:bg-green-700">
+                    <Button
+                      size="lg"
+                      className="bg-green-600 hover:bg-green-700"
+                    >
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Shop Now
                     </Button>
                     <Button variant="outline" size="lg">
                       Browse Products
                     </Button>
-                    <Button variant="outline" size="lg" className="bg-green-500 text-white hover:bg-green-600">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="bg-green-500 text-white hover:bg-green-600"
+                    >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       WhatsApp Us
                     </Button>
@@ -212,17 +255,24 @@ export default function HomePage() {
           </section>
 
           {/* What We Offer */}
-          <section id="products" className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+          <section
+            id="products"
+            className="w-full py-12 md:py-24 lg:py-32 bg-gray-50"
+          >
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">What We Offer</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
+                  What We Offer
+                </h2>
               </div>
               <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                 <Card className="p-6">
                   <CardContent className="space-y-4">
                     <div className="flex items-center space-x-2">
                       <div className="text-2xl">🐷</div>
-                      <h3 className="text-2xl font-bold text-green-700">Onimuelede Pigs & Pork</h3>
+                      <h3 className="text-2xl font-bold text-green-700">
+                        Onimuelede Pigs & Pork
+                      </h3>
                     </div>
                     <ul className="space-y-2">
                       <li className="flex items-center space-x-2">
@@ -248,12 +298,16 @@ export default function HomePage() {
                   <CardContent className="space-y-4">
                     <div className="flex items-center space-x-2">
                       <div className="text-2xl">🛍️</div>
-                      <h3 className="text-2xl font-bold text-green-700">Provision Stores</h3>
+                      <h3 className="text-2xl font-bold text-green-700">
+                        Provision Stores
+                      </h3>
                     </div>
                     <ul className="space-y-2">
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Snacks and drinks (biscuits, beverages, soft drinks)</span>
+                        <span>
+                          Snacks and drinks (biscuits, beverages, soft drinks)
+                        </span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
@@ -278,9 +332,12 @@ export default function HomePage() {
           <section className="w-full py-12 md:py-24 lg:py-32">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">How It Works</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
+                  How It Works
+                </h2>
                 <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Simple steps to get fresh pork and provisions delivered to your door
+                  Simple steps to get fresh pork and provisions delivered to
+                  your door
                 </p>
               </div>
               <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
@@ -289,21 +346,27 @@ export default function HomePage() {
                     <ShoppingCart className="h-10 w-10 text-green-600" />
                   </div>
                   <h3 className="text-xl font-bold">1. Browse Products</h3>
-                  <p className="text-gray-600">Live pigs, pork, provisions, foodstuff, drinks & more</p>
+                  <p className="text-gray-600">
+                    Live pigs, pork, provisions, foodstuff, drinks & more
+                  </p>
                 </div>
                 <div className="flex flex-col items-center space-y-4 text-center">
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
                     <Package className="h-10 w-10 text-green-600" />
                   </div>
                   <h3 className="text-xl font-bold">2. Place Your Order</h3>
-                  <p className="text-gray-600">Easy checkout. Choose delivery or pickup.</p>
+                  <p className="text-gray-600">
+                    Easy checkout. Choose delivery or pickup.
+                  </p>
                 </div>
                 <div className="flex flex-col items-center space-y-4 text-center">
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
                     <Truck className="h-10 w-10 text-green-600" />
                   </div>
                   <h3 className="text-xl font-bold">3. Get Fast Delivery</h3>
-                  <p className="text-gray-600">We deliver fresh and on time — always.</p>
+                  <p className="text-gray-600">
+                    We deliver fresh and on time — always.
+                  </p>
                 </div>
               </div>
             </div>
@@ -313,7 +376,9 @@ export default function HomePage() {
           <section className="w-full py-12 md:py-24 lg:py-32">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">Featured Products</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
+                  Featured Products
+                </h2>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <Card className="overflow-hidden">
@@ -329,7 +394,9 @@ export default function HomePage() {
                       <h3 className="font-semibold">Premium Live Pig</h3>
                       <Badge variant="destructive">Hot</Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">Pure Large white, 100kg</p>
+                    <p className="text-sm text-gray-600 mb-2">
+                      Pure Large white, 100kg
+                    </p>
                     <p className="font-bold text-green-600">₦150,000</p>
                   </CardContent>
                 </Card>
@@ -346,7 +413,9 @@ export default function HomePage() {
                       <h3 className="font-semibold">Fresh Pork Cuts</h3>
                       <Badge>Best Value</Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">Premium cuts per kg</p>
+                    <p className="text-sm text-gray-600 mb-2">
+                      Premium cuts per kg
+                    </p>
                     <p className="font-bold text-green-600">₦3,500/kg</p>
                   </CardContent>
                 </Card>
@@ -363,7 +432,9 @@ export default function HomePage() {
                       <h3 className="font-semibold">Weekend Kitchen Pack</h3>
                       <Badge variant="secondary">New</Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">Pork + groceries combo</p>
+                    <p className="text-sm text-gray-600 mb-2">
+                      Pork + groceries combo
+                    </p>
                     <p className="font-bold text-green-600">₦25,000</p>
                   </CardContent>
                 </Card>
@@ -375,17 +446,24 @@ export default function HomePage() {
           <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">What Our Customers Say</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
+                  What Our Customers Say
+                </h2>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <Card className="p-6">
                   <CardContent className="space-y-4">
                     <div className="flex items-center space-x-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                        />
                       ))}
                     </div>
-                    <p className="text-gray-600">"The pork was fresh and the delivery was fast!"</p>
+                    <p className="text-gray-600">
+                      "The pork was fresh and the delivery was fast!"
+                    </p>
                     <p className="font-semibold">— Kemi, Lagos</p>
                   </CardContent>
                 </Card>
@@ -393,10 +471,16 @@ export default function HomePage() {
                   <CardContent className="space-y-4">
                     <div className="flex items-center space-x-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                        />
                       ))}
                     </div>
-                    <p className="text-gray-600">"So convenient! I placed an order for pork cuts and got delivery within the hour. Excellent service."</p>
+                    <p className="text-gray-600">
+                      "So convenient! I placed an order for pork cuts and got
+                      delivery within the hour. Excellent service."
+                    </p>
                     <p className="font-semibold">— Tope, Abeokuta</p>
                   </CardContent>
                 </Card>
@@ -404,10 +488,15 @@ export default function HomePage() {
                   <CardContent className="space-y-4">
                     <div className="flex items-center space-x-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                        />
                       ))}
                     </div>
-                    <p className="text-gray-600">"Best quality provisions and excellent customer service!"</p>
+                    <p className="text-gray-600">
+                      "Best quality provisions and excellent customer service!"
+                    </p>
                     <p className="font-semibold">— Adebayo, Lagos</p>
                   </CardContent>
                 </Card>
@@ -419,7 +508,9 @@ export default function HomePage() {
           <section className="w-full py-12 md:py-24 lg:py-32">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">Why Choose O'Ben?</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
+                  Why Choose O'Ben?
+                </h2>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <div className="flex items-center space-x-3">
@@ -454,7 +545,9 @@ export default function HomePage() {
           <section className="w-full py-12 md:py-24 lg:py-32 bg-green-600 text-white">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Ready to eat fresh and live better?</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Ready to eat fresh and live better?
+                </h2>
                 <p className="max-w-[600px] text-green-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Get quality pork and provisions at the tap of a button.
                 </p>
@@ -462,7 +555,11 @@ export default function HomePage() {
                   <Button size="lg" variant="secondary">
                     Order Now
                   </Button>
-                  <Button size="lg" variant="outline" className="text-green-600 border-white hover:bg-white">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="text-green-600 border-white hover:bg-white"
+                  >
                     Shop Fresh Today
                   </Button>
                 </div>
@@ -482,12 +579,22 @@ export default function HomePage() {
                 </p>
                 <div className="w-full max-w-sm space-y-2">
                   <form className="flex gap-2">
-                    <Input type="email" placeholder="Enter your email" className="max-w-lg flex-1" />
-                    <Button type="submit" className="bg-green-600 hover:bg-green-700">
+                    <Input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="max-w-lg flex-1"
+                    />
+                    <Button
+                      type="submit"
+                      className="bg-green-600 hover:bg-green-700"
+                    >
                       Subscribe
                     </Button>
                   </form>
-                  <Button variant="outline" className="w-full bg-green-500 text-white hover:bg-green-600">
+                  <Button
+                    variant="outline"
+                    className="w-full bg-green-500 text-white hover:bg-green-600"
+                  >
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Join WhatsApp List
                   </Button>
@@ -520,12 +627,19 @@ export default function HomePage() {
                     About O'Ben Brands
                   </h2>
                   <p className="text-gray-600 mb-4">
-                    We are more than just a marketplace — we're your trusted partner for premium pigs, fresh pork, and daily provisions. 
-                    With a passion for quality and a heart for community, we connect local farms to your table through ethical sourcing, clean processing, 
-                    and fast delivery. Whether you're planning a family celebration or stocking up, we make fresh food simple, safe, 
-                    and accessible. We serve homes and businesses across Lagos, Ogun, and beyond with products you can trust and service you'll love.
+                    We are more than just a marketplace — we're your trusted
+                    partner for premium pigs, fresh pork, and daily provisions.
+                    With a passion for quality and a heart for community, we
+                    connect local farms to your table through ethical sourcing,
+                    clean processing, and fast delivery. Whether you're planning
+                    a family celebration or stocking up, we make fresh food
+                    simple, safe, and accessible. We serve homes and businesses
+                    across Lagos, Ogun, and beyond with products you can trust
+                    and service you'll love.
                   </p>
-                  <p className="text-green-700 font-semibold">Trusted by families, loved by cooks.</p>
+                  <p className="text-green-700 font-semibold">
+                    Trusted by families, loved by cooks.
+                  </p>
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800 mb-6">
@@ -546,7 +660,10 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-center space-x-3">
                       <MessageCircle className="w-5 h-5 text-green-600" />
-                      <Button variant="link" className="p-0 h-auto text-green-600">
+                      <Button
+                        variant="link"
+                        className="p-0 h-auto text-green-600"
+                      >
                         WhatsApp Support
                       </Button>
                     </div>
@@ -560,26 +677,52 @@ export default function HomePage() {
         {/* Footer */}
         <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-gray-50">
           <div className="flex items-center space-x-2">
-            <Image src="/oben-logo.png" alt="O'Ben Brands Logo" width={24} height={24} className="rounded-full" />
-            <p className="text-xs text-gray-600">© {new Date().getFullYear()} O'Ben Brands. All rights reserved.</p>
+            <Image
+              src="/oben-logo.png"
+              alt="O'Ben Brands Logo"
+              width={24}
+              height={24}
+              className="rounded-full"
+            />
+            <p className="text-xs text-gray-600">
+              © {new Date().getFullYear()} O'Ben Brands. All rights reserved.
+            </p>
           </div>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-            <Link href="#" className="text-xs hover:underline underline-offset-4 text-gray-600">
+            <Link
+              href="#"
+              className="text-xs hover:underline underline-offset-4 text-gray-600"
+            >
               Home
             </Link>
-            <Link href="#products" className="text-xs hover:underline underline-offset-4 text-gray-600">
+            <Link
+              href="#products"
+              className="text-xs hover:underline underline-offset-4 text-gray-600"
+            >
               Products
             </Link>
-            <Link href="#about" className="text-xs hover:underline underline-offset-4 text-gray-600">
+            <Link
+              href="#about"
+              className="text-xs hover:underline underline-offset-4 text-gray-600"
+            >
               About
             </Link>
-            <Link href="#contact" className="text-xs hover:underline underline-offset-4 text-gray-600">
+            <Link
+              href="#contact"
+              className="text-xs hover:underline underline-offset-4 text-gray-600"
+            >
               Contact
             </Link>
-            <Link href="#" className="text-xs hover:underline underline-offset-4 text-gray-600">
+            <Link
+              href="#"
+              className="text-xs hover:underline underline-offset-4 text-gray-600"
+            >
               Terms of Service
             </Link>
-            <Link href="#" className="text-xs hover:underline underline-offset-4 text-gray-600">
+            <Link
+              href="#"
+              className="text-xs hover:underline underline-offset-4 text-gray-600"
+            >
               Privacy Policy
             </Link>
           </nav>
@@ -589,10 +732,18 @@ export default function HomePage() {
       {/* Debug Info - Remove this in production */}
       <div className="fixed top-4 left-4 z-[60] bg-yellow-100 border border-yellow-300 p-2 rounded text-xs shadow-lg">
         <div className="font-bold">Debug Info:</div>
-        <div>showChat: <span className="font-mono">{String(showChat)}</span></div>
-        <div>input: <span className="font-mono">"{input}"</span></div>
-        <div>loading: <span className="font-mono">{String(loading)}</span></div>
-        <div>reply length: <span className="font-mono">{reply.length}</span></div>
+        <div>
+          showChat: <span className="font-mono">{String(showChat)}</span>
+        </div>
+        <div>
+          input: <span className="font-mono">"{input}"</span>
+        </div>
+        <div>
+          loading: <span className="font-mono">{String(loading)}</span>
+        </div>
+        <div>
+          reply length: <span className="font-mono">{reply.length}</span>
+        </div>
       </div>
 
       {/* AI Assistant Chat Interface */}
@@ -603,8 +754,8 @@ export default function HomePage() {
               <Bot className="w-5 h-5" />
               <span className="font-medium">AI Assistant</span>
             </div>
-            <button 
-              onClick={() => setShowChat(false)} 
+            <button
+              onClick={() => setShowChat(false)}
               className="text-white hover:text-gray-200 transition-colors"
             >
               <X className="w-4 h-4" />
@@ -620,8 +771,13 @@ export default function HomePage() {
                 </div>
               ) : (
                 <div className="text-gray-600 text-sm bg-white p-3 rounded-lg border">
-                  <p className="font-medium text-green-700 mb-2">👋 Welcome to O'Ben Brands!</p>
-                  <p>I'm here to help you with questions about our products, pricing, delivery, or orders. How can I assist you today?</p>
+                  <p className="font-medium text-green-700 mb-2">
+                    👋 Welcome to O'Ben Brands!
+                  </p>
+                  <p>
+                    I'm here to help you with questions about our products,
+                    pricing, delivery, or orders. How can I assist you today?
+                  </p>
                 </div>
               )}
             </div>
@@ -635,8 +791,8 @@ export default function HomePage() {
                   className="flex-1 text-sm"
                   disabled={loading}
                 />
-                <Button 
-                  onClick={handleSend} 
+                <Button
+                  onClick={handleSend}
                   size="sm"
                   disabled={loading || !input.trim()}
                   className="bg-green-600 hover:bg-green-700"
@@ -655,21 +811,24 @@ export default function HomePage() {
 
       {/* Floating WhatsApp Button */}
       <div className="fixed bottom-4 left-4 z-50">
-        <Button size="lg" className="rounded-full bg-green-500 hover:bg-green-600 shadow-lg">
+        <Button
+          size="lg"
+          className="rounded-full bg-green-500 hover:bg-green-600 shadow-lg"
+        >
           <MessageCircle className="w-6 h-6" />
         </Button>
       </div>
 
       {/* Floating AI Assistant Button (Mobile Backup) */}
       <div className="fixed bottom-20 left-4 z-50 md:hidden">
-        <Button 
+        <Button
           onClick={handleChatToggle}
-          size="lg" 
+          size="lg"
           className="rounded-full bg-blue-500 hover:bg-blue-600 shadow-lg"
         >
           <Bot className="w-6 h-6" />
         </Button>
       </div>
     </>
-  )
+  );
 }
