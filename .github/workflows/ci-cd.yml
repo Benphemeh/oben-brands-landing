@@ -74,8 +74,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+       # Step 5: Set image tag
+      - name: Set image tag
+        id: tag
+        run: echo "IMAGE_TAG=${{ github.sha }}" >> $GITHUB_ENV
 
-      # Step 5: Build and push Docker image
+      # Step 6: Build and push Docker image
       - name: Build & Push Docker image
         uses: docker/build-push-action@v4
         with:
