@@ -128,8 +128,4 @@ jobs:
     steps:
       # Step 1: Deploy to Render
       - name: Deploy to Render
-        uses: renderinc/render-deploy-action@v1
-        with:
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          service_id: your-render-service-id
-          action: deploy
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
