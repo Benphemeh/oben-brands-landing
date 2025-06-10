@@ -95,7 +95,7 @@ jobs:
   deploy_to_k8s:
     name: Deploy to Kubernetes
     needs: docker_push
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/deploy'
     runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout the code
