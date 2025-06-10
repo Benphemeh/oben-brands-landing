@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nextjs-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: nextjs
