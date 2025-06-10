@@ -214,7 +214,7 @@ export default function HomePage() {
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-green-800">
                       Your Trusted Source for Pigs, Pork & Provisions
                     </h1>
-                    <p className="max-w-[600px] text-gray-600 md:text-xl">
+                    <p className="max-w-[600px] text-gray-600 md:text-xl" >
                       Farm-fresh. Traceable. Delivered to your door. Quality
                       pork and everyday essentials from ethical farming
                       practices.
