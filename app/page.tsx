@@ -260,7 +260,7 @@ export default function HomePage() {
               <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                 <Card className="p-6">
                   <CardContent className="space-y-4">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2" >
                       <div className="text-2xl">🐷</div>
                       <h3 className="text-2xl font-bold text-green-700">
                         Onimuelede Pigs & Pork
