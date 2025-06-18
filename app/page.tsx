@@ -287,7 +287,8 @@ export default function HomePage() {
                   </CardContent>
                 </Card>
                 <Card className="p-6">
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-4">aws --version
+
                     <div className="flex items-center space-x-2">
                       <div className="text-2xl">🛍️</div>
                       <h3 className="text-2xl font-bold text-green-700">
@@ -298,7 +299,7 @@ export default function HomePage() {
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
                         <span>
-                          Snacks and drinks (biscuits, beverages, soft drinks)
+                          Snacks and drinks (biscuits, beverages, soft drinks...)
                         </span>
                       </li>
                       <li className="flex items-center space-x-2">
