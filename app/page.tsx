@@ -299,7 +299,7 @@ export default function HomePage() {
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
                         <span>
-                          Snacks and drinks (biscuits, beverages, soft drinks)
+                          Snacks and drinks (biscuits, beverages, soft drinks...)
                         </span>
                       </li>
                       <li className="flex items-center space-x-2">
