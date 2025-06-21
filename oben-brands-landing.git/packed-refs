@@ -1,0 +1,19 @@
+# pack-refs with: peeled fully-peeled sorted 
+93876da4bcf978c26414b78695360bbaeca5d43a refs/heads/deploy
+9197f180bb599f8cf6d68e060ec9976407abe18f refs/heads/fx/terraform
+1d687275d51d2919c932d523da0e619363d77e2f refs/heads/main
+85b4e84059c1bf18e8aca730c6bed9f81c6a9a79 refs/pull/1/head
+639fd6f952d47b852929f91452c9b76918de28a5 refs/pull/10/head
+a74714cad4e5a22516a5c6d2f654abe3c634677a refs/pull/11/head
+692fb589c5c31b8198fb23cb47d57f499fd72b4b refs/pull/12/head
+381b29ae54f30b7a6831a3f2912483b8328bc978 refs/pull/13/head
+93876da4bcf978c26414b78695360bbaeca5d43a refs/pull/14/head
+9197f180bb599f8cf6d68e060ec9976407abe18f refs/pull/15/head
+496187127d9cff2511171166bb203b6b6c8129ae refs/pull/2/head
+8e7781700294822f4c885170c2c67bb2ce21c0b7 refs/pull/3/head
+efe9454296a473ed15815dc82fac642a0d85db6f refs/pull/4/head
+959c06a76bb4174213f0fec30d18befb93296068 refs/pull/5/head
+448fab725f38d403fb719c4ba256c8842a6c622c refs/pull/6/head
+9a8102e241066cbcb0758182b2e8eaa04c4d3571 refs/pull/7/head
+5c82275a2196d16021d05726f8102d64c478b3d7 refs/pull/8/head
+90a5e5e69ed200c4f0a55e280a9c2f479bf82de1 refs/pull/9/head
