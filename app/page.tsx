@@ -723,7 +723,7 @@ export default function HomePage() {
       </div>
 
       {/* Debug Info - Remove this in production */}
-      <div className="fixed top-4 left-4 z-[60] bg-yellow-100 border border-yellow-300 p-2 rounded text-xs shadow-lg">
+      {/* <div className="fixed top-4 left-4 z-[60] bg-yellow-100 border border-yellow-300 p-2 rounded text-xs shadow-lg">
         <div className="font-bold">Debug Info:</div>
         <div>
           showChat: <span className="font-mono">{String(showChat)}</span>
@@ -737,7 +737,7 @@ export default function HomePage() {
         <div>
           reply length: <span className="font-mono">{reply.length}</span>
         </div>
-      </div>
+      </div> */}
 
       {/* AI Assistant Chat Interface */}
       {showChat && (
