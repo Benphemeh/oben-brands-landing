@@ -287,7 +287,7 @@ export default function HomePage() {
                   </CardContent>
                 </Card>
                 <Card className="p-6">
-                  <CardContent className="space-y-4">aws --version
+                  <CardContent className="space-y-4">
 
                     <div className="flex items-center space-x-2">
                       <div className="text-2xl">🛍️</div>
