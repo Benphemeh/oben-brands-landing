@@ -1,22 +1,68 @@
 import { NextResponse } from 'next/server';
 
+// Smart fallback responses for when API fails
+function getSmartMockResponse(message: string): string {
+  const lowerMessage = message.toLowerCase();
+  
+  // Greeting responses
+  if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+    return "Hello! Welcome to O'Ben Brands! 🐷 We're your trusted source for premium live pigs, fresh pork cuts, and provisions. How can I help you today?";
+  }
+  
+  // Pricing queries
+  if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
+    return "Our pricing: Live pigs (Large White, 100kg) start at ₦150,000. Fresh pork cuts are ₦3,500/kg. We also have affordable provisions and everyday essentials. Contact us on WhatsApp +2347037983163 for current rates!";
+  }
+  
+  // Product queries
+  if (lowerMessage.includes('pig') && !lowerMessage.includes('pork')) {
+    return "We offer premium live pigs including Large White breed (100kg for ₦150,000). All our pigs are ethically sourced from traceable farms. Perfect for celebrations, events, or farming!";
+  }
+  
+  if (lowerMessage.includes('pork')) {
+    return "Our fresh pork cuts are processed hygienically and sold at ₦3,500/kg. We offer various cuts including chops, belly, shoulder, and more. All meat is traceable and fresh!";
+  }
+  
+  if (lowerMessage.includes('provision') || lowerMessage.includes('snack') || lowerMessage.includes('drink')) {
+    return "Yes! Our provision store has snacks, beverages, soft drinks, biscuits, and everyday essentials. We offer real-time stock updates and seasonal discounts!";
+  }
+  
+  // Delivery queries
+  if (lowerMessage.includes('deliver') || lowerMessage.includes('location') || lowerMessage.includes('area')) {
+    return "We deliver across Lagos, Ogun, and beyond! Our delivery is fast, reliable, and we ensure freshness. Contact us on WhatsApp +2347037983163 to confirm delivery to your area.";
+  }
+  
+  // Contact queries
+  if (lowerMessage.includes('contact') || lowerMessage.includes('whatsapp') || lowerMessage.includes('phone')) {
+    return "You can reach us via:\n📱 WhatsApp: +2347037983163\n📧 Email: info@obenbrands.com or beniphemeh11@yahoo.com\nWe're here to help with orders, questions, and support!";
+  }
+  
+  // Order queries
+  if (lowerMessage.includes('order') || lowerMessage.includes('buy') || lowerMessage.includes('purchase')) {
+    return "Ready to order? You can:\n1️⃣ Browse our products on this website\n2️⃣ Contact us via WhatsApp +2347037983163\n3️⃣ Call us directly\nWe make ordering fresh, quality products simple and convenient!";
+  }
+  
+  // Quality/safety queries
+  if (lowerMessage.includes('quality') || lowerMessage.includes('safe') || lowerMessage.includes('clean') || lowerMessage.includes('hygien')) {
+    return "Quality is our priority! We ensure:\n✅ Ethical sourcing from traceable farms\n✅ Safe & hygienic processing\n✅ Fresh delivery\n✅ Clean handling practices\nTrusted by families across Lagos and beyond!";
+  }
+  
+  // Default helpful response
+  const defaultResponses = [
+    "I'm here to help with information about O'Ben Brands! We specialize in premium pigs, fresh pork, and provisions. What would you like to know?",
+    "Great question! O'Ben Brands offers live pigs, pork cuts, and everyday provisions. We serve Lagos, Ogun, and beyond. How can I assist you?",
+    "Thanks for your interest in O'Ben Brands! We're your trusted partner for quality pigs, pork, and provisions. What specific information do you need?",
+  ];
+  
+  return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+}
+
 export async function POST(req: Request) {
-  console.log('🔥 API route called!'); // Debug log
+  console.log('🔥 API route called!'); 
   
   try {
-    const apiKey = process.env.OPENAI_API_KEY;
-    console.log('🔑 API Key exists:', !!apiKey); // Debug log (don't log actual key)
-
-    if (!apiKey) {
-      console.error('❌ Missing OpenAI API key');
-      return NextResponse.json(
-        { error: 'AI service configuration error' }, 
-        { status: 500 }
-      );
-    }
-
     const body = await req.json();
-    console.log('📝 Request body received:', body); // Debug log
+    console.log('📝 Request body received:', body); 
     
     const { message } = body;
 
@@ -28,76 +74,125 @@ export async function POST(req: Request) {
       );
     }
 
-    console.log('🚀 Sending request to OpenAI...'); // Debug log
+    const geminiApiKey = process.env.GEMINI_API_KEY;
+    console.log('🔑 Gemini API Key exists:', !!geminiApiKey);
 
-    const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          {
-            role: 'system',
-            content: `You are a helpful AI assistant for O'Ben Brands, a company that sells pigs, pork, and provisions in Nigeria. 
-            
-            Key information:
-            - We sell live pigs (around ₦150,000 for 100kg Large White)
-            - Fresh pork cuts at ₦3,500/kg
-            - Provisions and everyday essentials
-            - We serve Lagos, Ogun, and beyond
-            - Contact: +2347037983163 (WhatsApp)
-            - Email: info@obenbrands.com, beniphemeh11@yahoo.com
-            - We offer fast delivery and ethical sourcing
-            
-            Be friendly, helpful, and focus on our products and services. Keep responses concise (under 100 words). If you don't know something specific, suggest they contact us via WhatsApp.`
-          },
-          { 
-            role: 'user', 
-            content: message 
-          }
-        ],
-        max_tokens: 150,
-        temperature: 0.7,
-      }),
-    });
-
-    console.log('📡 OpenAI response status:', openaiRes.status); // Debug log
-
-    if (!openaiRes.ok) {
-      const errorText = await openaiRes.text();
-      console.error('❌ OpenAI API error:', openaiRes.status, errorText);
-      
-      // More specific error messages
-      if (openaiRes.status === 401) {
-        return NextResponse.json(
-          { error: 'AI service authentication failed. Please contact support.' }, 
-          { status: 500 }
-        );
-      } else if (openaiRes.status === 429) {
-        return NextResponse.json(
-          { error: 'AI service is busy. Please try again in a moment.' }, 
-          { status: 429 }
-        );
-      } else {
-        return NextResponse.json(
-          { error: 'AI service temporarily unavailable. Please contact us via WhatsApp at +2347037983163.' }, 
-          { status: 500 }
-        );
-      }
+    if (!geminiApiKey) {
+      console.log('⚠️ No Gemini API key, using smart fallback');
+      const fallbackReply = getSmartMockResponse(message);
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API delay
+      return NextResponse.json({ reply: fallbackReply });
     }
 
-    const data = await openaiRes.json();
-    console.log('✅ OpenAI response received successfully'); // Debug log
+    console.log('🚀 Sending request to Gemini...'); 
 
-    const reply = data.choices?.[0]?.message?.content || 'I apologize, but I couldn\'t generate a response. Please contact us via WhatsApp at +2347037983163.';
-    
-    return NextResponse.json({ reply });
+    try {
+      const geminiRes = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiApiKey}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: `You are a helpful AI assistant for O'Ben Brands, a Nigerian company that sells pigs, pork, and provisions.
+
+IMPORTANT BUSINESS INFORMATION:
+- We sell live pigs (Large White breed, 100kg = ₦150,000)
+- Fresh pork cuts at ₦3,500/kg
+- Provisions store with snacks, beverages, soft drinks, biscuits, everyday essentials
+- We serve Lagos, Ogun, and surrounding areas
+- Contact: +2347037983163 (WhatsApp)
+- Emails: info@obenbrands.com, beniphemeh11@yahoo.com
+- We offer fast delivery and ethical sourcing
+- Safe & hygienic processing practices
+- Traceable farms and clean handling
+
+INSTRUCTIONS:
+- Be friendly, helpful, and professional
+- Focus on our products and services
+- Keep responses under 100 words
+- If you don't know specific details, suggest they contact us via WhatsApp
+- Always provide accurate pricing information
+- Emphasize quality, freshness, and reliability
+
+CUSTOMER MESSAGE: ${message}
+
+Respond helpfully as O'Ben Brands' AI assistant:`
+              }]
+            }],
+            generationConfig: {
+              temperature: 0.7,
+              topK: 40,
+              topP: 0.95,
+              maxOutputTokens: 200,
+            },
+            safetySettings: [
+              {
+                category: "HARM_CATEGORY_HARASSMENT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_HATE_SPEECH",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              }
+            ]
+          }),
+        }
+      );
+
+      console.log('📡 Gemini response status:', geminiRes.status);
+
+      if (!geminiRes.ok) {
+        const errorText = await geminiRes.text();
+        console.error('❌ Gemini API error:', geminiRes.status, errorText);
+        
+        // Specific Gemini error handling
+        if (geminiRes.status === 400) {
+          console.log('⚠️ Gemini bad request, using fallback');
+        } else if (geminiRes.status === 403) {
+          console.log('⚠️ Gemini API key issue, using fallback');
+        } else if (geminiRes.status === 429) {
+          console.log('⚠️ Gemini rate limit, using fallback');
+        } else {
+          console.log('⚠️ Gemini API failed, using fallback');
+        }
+        
+        // Fall back to smart mock response
+        const fallbackReply = getSmartMockResponse(message);
+        return NextResponse.json({ reply: fallbackReply });
+      }
+
+      const data = await geminiRes.json();
+      console.log('✅ Gemini response received successfully');
+
+      // Extract reply from Gemini's response structure
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 
+                   'I apologize, but I couldn\'t generate a response. Please contact us via WhatsApp at +2347037983163.';
+      
+      return NextResponse.json({ reply });
+
+    } catch (geminiError) {
+      console.error('💥 Gemini API error:', geminiError);
+      console.log('⚠️ Falling back to smart mock response');
+      
+      // Fall back to smart mock response
+      const fallbackReply = getSmartMockResponse(message);
+      return NextResponse.json({ reply: fallbackReply });
+    }
 
   } catch (error) {
-    console.error('💥 Detailed error:', error);
+    console.error('💥 General error:', error);
     return NextResponse.json(
       { 
         error: 'Sorry, there was an error processing your request. Please contact us via WhatsApp at +2347037983163.' 
@@ -107,48 +202,13 @@ export async function POST(req: Request) {
   }
 }
 
-// Test endpoint - remove this after testing
+// Test endpoint
 export async function GET() {
+  const geminiApiKey = process.env.GEMINI_API_KEY;
   return NextResponse.json({ 
-    message: 'Chat API is working! Use POST method to send messages.',
-    timestamp: new Date().toISOString()
+    message: 'O\'Ben Brands Chat API is working! 🐷',
+    timestamp: new Date().toISOString(),
+    mode: geminiApiKey ? 'Gemini AI with Smart Fallback' : 'Smart Mock Mode',
+    apiKeyConfigured: !!geminiApiKey
   });
 }
-
-// import { NextResponse } from 'next/server'
-
-// export async function POST(req: Request) {
-//   const apiKey = process.env.OPENAI_API_KEY
-
-//   if (!apiKey) {
-//     return NextResponse.json({ error: 'Missing OpenAI API key' }, { status: 500 })
-//   }
-
-//   const { message } = await req.json()
-
-//   if (!message || typeof message !== 'string') {
-//     return NextResponse.json({ error: 'Invalid message' }, { status: 400 })
-//   }
-
-//   try {
-//     const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-//       method: 'POST',
-//       headers: {
-//         Authorization: `Bearer ${apiKey}`,
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         model: 'gpt-3.5-turbo',
-//         messages: [{ role: 'user', content: message }],
-//       }),
-//     })
-
-//     const data = await openaiRes.json()
-//     const reply = data.choices?.[0]?.message?.content || 'No reply'
-
-//     return NextResponse.json({ reply })
-//   } catch (error) {
-//     console.error('OpenAI error:', error)
-//     return NextResponse.json({ error: 'OpenAI API request failed' }, { status: 500 })
-//   }
-// }

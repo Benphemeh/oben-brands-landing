@@ -741,7 +741,7 @@ export default function HomePage() {
 
       {/* AI Assistant Chat Interface */}
       {showChat && (
-        <div className="fixed bottom-4 right-4 z-[55] w-80 h-96 bg-white border-2 border-green-500 rounded-lg shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
+        <div className="fixed bottom-16 right-4 z-[55] w-80 h-96 bg-white border-2 border-green-500 rounded-lg shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
           <div className="flex items-center justify-between p-4 border-b bg-green-600 text-white rounded-t-lg">
             <div className="flex items-center space-x-2">
               <Bot className="w-5 h-5" />
