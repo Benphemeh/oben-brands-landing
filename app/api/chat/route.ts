@@ -1,33 +1,34 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-  console.log('API route called'); // Debug log
+  console.log('🔥 API route called!'); // Debug log
   
   try {
     const apiKey = process.env.OPENAI_API_KEY;
+    console.log('🔑 API Key exists:', !!apiKey); // Debug log (don't log actual key)
 
     if (!apiKey) {
-      console.error('Missing OpenAI API key');
+      console.error('❌ Missing OpenAI API key');
       return NextResponse.json(
-        { error: 'Missing OpenAI API key' }, 
+        { error: 'AI service configuration error' }, 
         { status: 500 }
       );
     }
 
     const body = await req.json();
-    console.log('Request body:', body); // Debug log
+    console.log('📝 Request body received:', body); // Debug log
     
     const { message } = body;
 
     if (!message || typeof message !== 'string') {
-      console.error('Invalid message:', message);
+      console.error('❌ Invalid message:', message);
       return NextResponse.json(
-        { error: 'Invalid message' }, 
+        { error: 'Please provide a valid message' }, 
         { status: 400 }
       );
     }
 
-    console.log('Sending request to OpenAI...'); // Debug log
+    console.log('🚀 Sending request to OpenAI...'); // Debug log
 
     const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -51,7 +52,7 @@ export async function POST(req: Request) {
             - Email: info@obenbrands.com, beniphemeh11@yahoo.com
             - We offer fast delivery and ethical sourcing
             
-            Be friendly, helpful, and focus on our products and services. If you don't know something specific, suggest they contact us via WhatsApp.`
+            Be friendly, helpful, and focus on our products and services. Keep responses concise (under 100 words). If you don't know something specific, suggest they contact us via WhatsApp.`
           },
           { 
             role: 'user', 
@@ -63,27 +64,40 @@ export async function POST(req: Request) {
       }),
     });
 
+    console.log('📡 OpenAI response status:', openaiRes.status); // Debug log
+
     if (!openaiRes.ok) {
       const errorText = await openaiRes.text();
-      console.error('OpenAI API error:', openaiRes.status, openaiRes.statusText, errorText);
+      console.error('❌ OpenAI API error:', openaiRes.status, errorText);
       
-      return NextResponse.json(
-        { 
-          error: 'Sorry, our AI assistant is temporarily unavailable. Please contact us via WhatsApp at +2347037983163.' 
-        }, 
-        { status: 500 }
-      );
+      // More specific error messages
+      if (openaiRes.status === 401) {
+        return NextResponse.json(
+          { error: 'AI service authentication failed. Please contact support.' }, 
+          { status: 500 }
+        );
+      } else if (openaiRes.status === 429) {
+        return NextResponse.json(
+          { error: 'AI service is busy. Please try again in a moment.' }, 
+          { status: 429 }
+        );
+      } else {
+        return NextResponse.json(
+          { error: 'AI service temporarily unavailable. Please contact us via WhatsApp at +2347037983163.' }, 
+          { status: 500 }
+        );
+      }
     }
 
     const data = await openaiRes.json();
-    console.log('OpenAI response received:', data); // Debug log
+    console.log('✅ OpenAI response received successfully'); // Debug log
 
     const reply = data.choices?.[0]?.message?.content || 'I apologize, but I couldn\'t generate a response. Please contact us via WhatsApp at +2347037983163.';
     
     return NextResponse.json({ reply });
 
   } catch (error) {
-    console.error('Detailed error:', error);
+    console.error('💥 Detailed error:', error);
     return NextResponse.json(
       { 
         error: 'Sorry, there was an error processing your request. Please contact us via WhatsApp at +2347037983163.' 
@@ -92,6 +106,15 @@ export async function POST(req: Request) {
     );
   }
 }
+
+// Test endpoint - remove this after testing
+export async function GET() {
+  return NextResponse.json({ 
+    message: 'Chat API is working! Use POST method to send messages.',
+    timestamp: new Date().toISOString()
+  });
+}
+
 // import { NextResponse } from 'next/server'
 
 // export async function POST(req: Request) {
