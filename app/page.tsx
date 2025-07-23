@@ -21,67 +21,28 @@ import {
   Leaf,
   Heart,
   Bot,
-  Send,
-  X,
   Menu,
 } from "lucide-react";
 
+// Import our new chat components
+import ChatInterface from "@/components/chat/chatInterface";
+import FloatingChatButton from "@/components/chat/floatingChatButton";
+
 export default function HomePage() {
-  // Chat functionality
-  const [input, setInput] = useState("");
-  const [reply, setReply] = useState("");
-  const [loading, setLoading] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleChatToggle = () => {
-    console.log("Chat toggle clicked, current showChat:", showChat);
     setShowChat(!showChat);
-    console.log("Chat will be:", !showChat);
   };
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
-
-    setLoading(true);
-    console.log("Sending message:", input);
-
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
-      });
-
-      console.log("Response status:", res.status);
-
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-
-      const data = await res.json();
-      console.log("Response data:", data);
-
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      setReply(data.reply);
-      setInput("");
-    } catch (error) {
-      console.error("Chat error:", error);
-      setReply(
-        "Sorry, there was an error processing your request. Please try again or contact us via WhatsApp at +2347037983163."
-      );
-    }
-    setLoading(false);
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/2347037983163', '_blank');
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
+  const handleShopNowClick = () => {
+    // You can replace this with your actual shop URL or scroll to products
+    document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -139,11 +100,19 @@ export default function HomePage() {
 
             {/* Desktop Action Buttons */}
             <div className="hidden md:flex items-center space-x-2">
-              <Button variant="outline" size="sm">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={handleWhatsAppClick}
+              >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 WhatsApp
               </Button>
-              <Button size="sm" className="bg-green-600 hover:bg-green-700">
+              <Button 
+                size="sm" 
+                className="bg-green-600 hover:bg-green-700"
+                onClick={handleShopNowClick}
+              >
                 Shop Now
               </Button>
             </div>
@@ -155,6 +124,9 @@ export default function HomePage() {
                 className="text-green-600 hover:text-green-700 p-2 rounded-md border border-green-200"
               >
                 <Bot className="w-5 h-5" />
+                {showChat && (
+                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full"></span>
+                )}
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -172,29 +144,38 @@ export default function HomePage() {
                 <Link
                   href="#products"
                   className="block text-sm font-medium text-gray-600 hover:text-green-600"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   Products
                 </Link>
                 <Link
                   href="#about"
                   className="block text-sm font-medium text-gray-600 hover:text-green-600"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   About
                 </Link>
                 <Link
                   href="#contact"
                   className="block text-sm font-medium text-gray-600 hover:text-green-600"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   Contact
                 </Link>
                 <div className="flex space-x-2 pt-2">
-                  <Button variant="outline" size="sm" className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={handleWhatsAppClick}
+                  >
                     <MessageCircle className="w-4 h-4 mr-2" />
                     WhatsApp
                   </Button>
                   <Button
                     size="sm"
                     className="bg-green-600 hover:bg-green-700 flex-1"
+                    onClick={handleShopNowClick}
                   >
                     Shop Now
                   </Button>
@@ -214,7 +195,7 @@ export default function HomePage() {
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-green-800">
                       Your Trusted Source for Pigs, Pork & Provisions
                     </h1>
-                    <p className="max-w-[600px] text-gray-600 md:text-xl" >
+                    <p className="max-w-[600px] text-gray-600 md:text-xl">
                       Farm-fresh. Traceable. Delivered to your door. Quality
                       pork and everyday essentials from ethical farming
                       practices.
@@ -224,11 +205,16 @@ export default function HomePage() {
                     <Button
                       size="lg"
                       className="bg-green-600 hover:bg-green-700"
+                      onClick={handleShopNowClick}
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Shop Now
                     </Button>
-                    <Button variant="outline" size="lg">
+                    <Button 
+                      variant="outline" 
+                      size="lg"
+                      onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
                       Browse Products
                     </Button>
                   </div>
@@ -256,11 +242,14 @@ export default function HomePage() {
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
                   What We Offer
                 </h2>
+                <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  From premium live pigs to fresh pork cuts and everyday provisions, we bring quality from farm to your table.
+                </p>
               </div>
               <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                 <Card className="p-6">
                   <CardContent className="space-y-4">
-                    <div className="flex items-center space-x-2" >
+                    <div className="flex items-center space-x-2">
                       <div className="text-2xl">🐷</div>
                       <h3 className="text-2xl font-bold text-green-700">
                         Onimuelede Pigs & Pork
@@ -269,11 +258,11 @@ export default function HomePage() {
                     <ul className="space-y-2">
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Buy pigs by size or breed</span>
+                        <span>Premium live pigs - Large White breed (100kg) - ₦150,000</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Freshly processed pork sold per kg</span>
+                        <span>Fresh pork cuts - ₦3,500/kg (chops, belly, ribs & more)</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
@@ -288,31 +277,28 @@ export default function HomePage() {
                 </Card>
                 <Card className="p-6">
                   <CardContent className="space-y-4">
-
                     <div className="flex items-center space-x-2">
                       <div className="text-2xl">🛍️</div>
                       <h3 className="text-2xl font-bold text-green-700">
-                        Provision Stores
+                        O'Ben Provision Store
                       </h3>
                     </div>
                     <ul className="space-y-2">
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>
-                          Snacks and drinks (biscuits, beverages, soft drinks...)
-                        </span>
+                        <span>Quality foodstuff & groceries</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Real-time stock updates</span>
+                        <span>Snacks, biscuits & beverages</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Seasonal discounts & coupons</span>
+                        <span>Real-time stock updates & seasonal discounts</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Everyday essentials</span>
+                        <span>Everyday essentials at competitive prices</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -329,8 +315,7 @@ export default function HomePage() {
                   How It Works
                 </h2>
                 <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Simple steps to get fresh pork and provisions delivered to
-                  your door
+                  Simple steps to get fresh pork and provisions delivered to your door
                 </p>
               </div>
               <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
@@ -338,27 +323,27 @@ export default function HomePage() {
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
                     <ShoppingCart className="h-10 w-10 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-bold">1. Browse Products</h3>
+                  <h3 className="text-xl font-bold">1. Browse & Order</h3>
                   <p className="text-gray-600">
-                    Live pigs, pork, provisions, foodstuff, drinks & more
+                    Browse our products online, via WhatsApp, or visit our locations
                   </p>
                 </div>
                 <div className="flex flex-col items-center space-y-4 text-center">
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
                     <Package className="h-10 w-10 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-bold">2. Place Your Order</h3>
+                  <h3 className="text-xl font-bold">2. Quality Processing</h3>
                   <p className="text-gray-600">
-                    Easy checkout. Choose delivery or pickup.
+                    Fresh processing with temperature-controlled packaging
                   </p>
                 </div>
                 <div className="flex flex-col items-center space-y-4 text-center">
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
                     <Truck className="h-10 w-10 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-bold">3. Get Fast Delivery</h3>
+                  <h3 className="text-xl font-bold">3. Fast Delivery</h3>
                   <p className="text-gray-600">
-                    We deliver fresh and on time — always.
+                    Same-day delivery for orders before 12pm across Lagos & Ogun
                   </p>
                 </div>
               </div>
@@ -366,39 +351,42 @@ export default function HomePage() {
           </section>
 
           {/* Featured Products */}
-          <section className="w-full py-12 md:py-24 lg:py-32">
+          <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
                   Featured Products
                 </h2>
+                <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Premium quality products at competitive prices
+                </p>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <Card className="overflow-hidden">
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                   <Image
                     src="/IMG_8980.JPG?height=200&width=300"
                     width="300"
                     height="200"
-                    alt="Live Pig"
+                    alt="Premium Live Pig"
                     className="w-full h-48 object-cover"
                   />
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-semibold">Premium Live Pig</h3>
-                      <Badge variant="destructive">Hot</Badge>
+                      <Badge variant="destructive">Popular</Badge>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">
-                      Pure Large white, 100kg
+                      Large White breed, 100kg - Health certified
                     </p>
-                    <p className="font-bold text-green-600">₦150,000</p>
+                    <p className="font-bold text-green-600 text-lg">₦150,000</p>
                   </CardContent>
                 </Card>
-                <Card className="overflow-hidden">
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                   <Image
                     src="/Pork-Chops-2.webp?height=200&width=300"
                     width="300"
                     height="200"
-                    alt="Fresh Pork"
+                    alt="Fresh Pork Cuts"
                     className="w-full h-48 object-cover"
                   />
                   <CardContent className="p-4">
@@ -407,12 +395,12 @@ export default function HomePage() {
                       <Badge>Best Value</Badge>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">
-                      Premium cuts per kg
+                      Chops, belly, shoulder, ribs - Vacuum sealed
                     </p>
-                    <p className="font-bold text-green-600">₦3,500/kg</p>
+                    <p className="font-bold text-green-600 text-lg">₦3,500/kg</p>
                   </CardContent>
                 </Card>
-                <Card className="overflow-hidden">
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                   <Image
                     src="/provisions.png?height=200&width=300"
                     width="300"
@@ -423,12 +411,12 @@ export default function HomePage() {
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-semibold">Weekend Kitchen Pack</h3>
-                      <Badge variant="secondary">New</Badge>
+                      <Badge variant="secondary">Combo Deal</Badge>
                     </div>
                     <p className="text-sm text-gray-600 mb-2">
-                      Pork + groceries combo
+                      Pork cuts + essential provisions bundle
                     </p>
-                    <p className="font-bold text-green-600">₦25,000</p>
+                    <p className="font-bold text-green-600 text-lg">₦25,000</p>
                   </CardContent>
                 </Card>
               </div>
@@ -436,7 +424,7 @@ export default function HomePage() {
           </section>
 
           {/* Testimonials */}
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+          <section className="w-full py-12 md:py-24 lg:py-32">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
@@ -455,9 +443,9 @@ export default function HomePage() {
                       ))}
                     </div>
                     <p className="text-gray-600">
-                      "The pork was fresh and the delivery was fast!"
+                      "The pork was incredibly fresh and the delivery was super fast! Quality you can trust."
                     </p>
-                    <p className="font-semibold">— Kemi, Lagos</p>
+                    <p className="font-semibold">— Kemi A., Lagos</p>
                   </CardContent>
                 </Card>
                 <Card className="p-6">
@@ -471,10 +459,9 @@ export default function HomePage() {
                       ))}
                     </div>
                     <p className="text-gray-600">
-                      "So convenient! I placed an order for pork cuts and got
-                      delivery within the hour. Excellent service."
+                      "Ordered pork cuts in the morning, got delivery within hours. The WhatsApp ordering is so convenient!"
                     </p>
-                    <p className="font-semibold">— Tope, Abeokuta</p>
+                    <p className="font-semibold">— Tope O., Abeokuta</p>
                   </CardContent>
                 </Card>
                 <Card className="p-6">
@@ -488,9 +475,9 @@ export default function HomePage() {
                       ))}
                     </div>
                     <p className="text-gray-600">
-                      "Best quality provisions and excellent customer service!"
+                      "Best quality provisions and excellent customer service. The AI assistant is very helpful too!"
                     </p>
-                    <p className="font-semibold">— Adebayo, Lagos</p>
+                    <p className="font-semibold">— Adebayo M., Lagos</p>
                   </CardContent>
                 </Card>
               </div>
@@ -498,37 +485,40 @@ export default function HomePage() {
           </section>
 
           {/* Why Choose O'Ben */}
-          <section className="w-full py-12 md:py-24 lg:py-32">
+          <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
-                  Why Choose O'Ben?
+                  Why Choose O'Ben Brands?
                 </h2>
+                <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  From farm to table - we ensure quality every step of the way
+                </p>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <div className="flex items-center space-x-3">
                   <Leaf className="w-6 h-6 text-green-600" />
-                  <span>Fresh & traceable meats</span>
+                  <span>Fresh & traceable from certified farms</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Truck className="w-6 h-6 text-green-600" />
-                  <span>Fast & reliable delivery</span>
+                  <span>Same-day delivery across Lagos & Ogun</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Shield className="w-6 h-6 text-green-600" />
-                  <span>Safe & clean processing</span>
+                  <span>Safe & hygienic processing standards</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Heart className="w-6 h-6 text-green-600" />
-                  <span>Affordable pricing</span>
+                  <span>Affordable pricing with quality guarantee</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Users className="w-6 h-6 text-green-600" />
-                  <span>Local farmer partnerships</span>
+                  <span>Supporting local farmers & communities</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <MessageCircle className="w-6 h-6 text-green-600" />
-                  <span>WhatsApp support available</span>
+                  <span>24/7 WhatsApp support & AI assistance</span>
                 </div>
               </div>
             </div>
@@ -539,74 +529,29 @@ export default function HomePage() {
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Ready to eat fresh and live better?
+                  Ready to Experience Fresh Quality?
                 </h2>
                 <p className="max-w-[600px] text-green-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Get quality pork and provisions at the tap of a button.
+                  Get premium pork and provisions delivered fresh to your door. New customers save ₦500!
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" variant="secondary">
-                    Order Now
+                  <Button 
+                    size="lg" 
+                    variant="secondary"
+                    onClick={handleWhatsAppClick}
+                  >
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    Order on WhatsApp
                   </Button>
                   <Button
                     size="lg"
                     variant="outline"
                     className="text-green-600 border-white hover:bg-white"
+                    onClick={handleShopNowClick}
                   >
-                    Shop Fresh Today
+                    Browse Products
                   </Button>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Newsletter Signup */}
-          <section className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6">
-              <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800">
-                  Get up to 50% off your first order!
-                </h2>
-                <p className="max-w-[600px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Join our community for deals, tips, and farm updates.
-                </p>
-                <div className="w-full max-w-sm space-y-2">
-                  <form className="flex gap-2">
-                    <Input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="max-w-lg flex-1"
-                    />
-                    <Button
-                      type="submit"
-                      className="bg-green-600 hover:bg-green-700"
-                    >
-                      Subscribe
-                    </Button>
-                  </form>
-                  <Button
-                    variant="outline"
-                    className="w-full bg-green-500 text-white hover:bg-green-600"
-                  >
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Join WhatsApp List
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* WhatsApp CTA */}
-          <section className="w-full py-12 md:py-24 lg:py-32 bg-green-50">
-            <div className="container px-4 md:px-6">
-              <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800">
-                  Prefer chatting? Order easily on WhatsApp
-                </h2>
-                <Button size="lg" className="bg-green-500 hover:bg-green-600">
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  Message us now on WhatsApp
-                </Button>
               </div>
             </div>
           </section>
@@ -624,41 +569,46 @@ export default function HomePage() {
                     partner for premium pigs, fresh pork, and daily provisions.
                     With a passion for quality and a heart for community, we
                     connect local farms to your table through ethical sourcing,
-                    clean processing, and fast delivery. Whether you're planning
-                    a family celebration or stocking up, we make fresh food
-                    simple, safe, and accessible. We serve homes and businesses
-                    across Lagos, Ogun, and beyond with products you can trust
-                    and service you'll love.
+                    clean processing, and fast delivery.
                   </p>
-                  <p className="text-green-700 font-semibold">
-                    Trusted by families, loved by cooks.
+                  <p className="text-green-700 font-semibold text-lg">
+                    "Trusted by families, loved by cooks."
                   </p>
+                  <div className="mt-6">
+                    <h3 className="font-semibold text-green-700 mb-2">Service Areas:</h3>
+                    <p className="text-gray-600">Lagos State, Ogun State & surrounding areas</p>
+                  </div>
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800 mb-6">
-                    Contact & Support
+                    Contact & Locations
                   </h2>
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3">
                       <Phone className="w-5 h-5 text-green-600" />
-                      <span>+2347037983163</span>
+                      <span>+2347037983163 (24/7 Support)</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Mail className="w-5 h-5 text-green-600" />
                       <span>info@obenbrands.com</span>
                     </div>
                     <div className="flex items-center space-x-3">
-                      <Mail className="w-5 h-5 text-green-600" />
-                      <span>beniphemeh11@yahoo.com</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
                       <MessageCircle className="w-5 h-5 text-green-600" />
                       <Button
                         variant="link"
-                        className="p-0 h-auto text-green-600"
+                        className="p-0 h-auto text-green-600 hover:text-green-700"
+                        onClick={handleWhatsAppClick}
                       >
                         WhatsApp Support
                       </Button>
+                    </div>
+                    <div className="mt-6 space-y-3">
+                      <h3 className="font-semibold text-green-700">Physical Locations:</h3>
+                      <div className="text-gray-600 space-y-2">
+                        <p><strong>Lagos:</strong> 1 Obadiah Street, Ilaje Bariga</p>
+                        <p><strong>Abeokuta:</strong> Plot 3, Boundary Estate Shoyooye</p>
+                        <p><strong>Hours:</strong> Monday-Saturday, 9am-5pm</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -683,12 +633,6 @@ export default function HomePage() {
           </div>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <Link
-              href="#"
-              className="text-xs hover:underline underline-offset-4 text-gray-600"
-            >
-              Home
-            </Link>
-            <Link
               href="#products"
               className="text-xs hover:underline underline-offset-4 text-gray-600"
             >
@@ -710,117 +654,41 @@ export default function HomePage() {
               href="#"
               className="text-xs hover:underline underline-offset-4 text-gray-600"
             >
-              Terms of Service
+              Terms
             </Link>
             <Link
               href="#"
               className="text-xs hover:underline underline-offset-4 text-gray-600"
             >
-              Privacy Policy
+              Privacy
             </Link>
           </nav>
         </footer>
       </div>
 
-      {/* Debug Info - Remove this in production */}
-      {/* <div className="fixed top-4 left-4 z-[60] bg-yellow-100 border border-yellow-300 p-2 rounded text-xs shadow-lg">
-        <div className="font-bold">Debug Info:</div>
-        <div>
-          showChat: <span className="font-mono">{String(showChat)}</span>
-        </div>
-        <div>
-          input: <span className="font-mono">"{input}"</span>
-        </div>
-        <div>
-          loading: <span className="font-mono">{String(loading)}</span>
-        </div>
-        <div>
-          reply length: <span className="font-mono">{reply.length}</span>
-        </div>
-      </div> */}
-
-      {/* AI Assistant Chat Interface */}
-      {showChat && (
-        <div className="fixed bottom-16 right-4 z-[55] w-80 h-96 bg-white border-2 border-green-500 rounded-lg shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
-          <div className="flex items-center justify-between p-4 border-b bg-green-600 text-white rounded-t-lg">
-            <div className="flex items-center space-x-2">
-              <Bot className="w-5 h-5" />
-              <span className="font-medium">AI Assistant</span>
-            </div>
-            <button
-              onClick={() => setShowChat(false)}
-              className="text-white hover:text-gray-200 transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-          <div className="flex flex-col h-full">
-            <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
-              {reply ? (
-                <div className="space-y-3">
-                  <div className="bg-white p-3 rounded-lg border shadow-sm">
-                    <p className="text-sm text-gray-800">{reply}</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-gray-600 text-sm bg-white p-3 rounded-lg border">
-                  <p className="font-medium text-green-700 mb-2">
-                    👋 Welcome to O'Ben Brands!
-                  </p>
-                  <p>
-                    I'm here to help you with questions about our products,
-                    pricing, delivery, or orders. How can I assist you today?
-                  </p>
-                </div>
-              )}
-            </div>
-            <div className="p-4 border-t bg-white rounded-b-lg">
-              <div className="flex space-x-2">
-                <Input
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Ask about our products..."
-                  className="flex-1 text-sm"
-                  disabled={loading}
-                />
-                <Button
-                  onClick={handleSend}
-                  size="sm"
-                  disabled={loading || !input.trim()}
-                  className="bg-green-600 hover:bg-green-700"
-                >
-                  {loading ? (
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <Send className="w-4 h-4" />
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Chat Interface */}
+      <ChatInterface 
+        isOpen={showChat} 
+        onClose={() => setShowChat(false)} 
+      />
 
       {/* Floating WhatsApp Button */}
       <div className="fixed bottom-4 left-4 z-50">
         <Button
           size="lg"
           className="rounded-full bg-green-500 hover:bg-green-600 shadow-lg"
+          onClick={handleWhatsAppClick}
         >
           <MessageCircle className="w-6 h-6" />
         </Button>
       </div>
 
-      {/* Floating AI Assistant Button (Mobile Backup) */}
-      <div className="fixed bottom-20 left-4 z-50 md:hidden">
-        <Button
-          onClick={handleChatToggle}
-          size="lg"
-          className="rounded-full bg-blue-500 hover:bg-blue-600 shadow-lg"
-        >
-          <Bot className="w-6 h-6" />
-        </Button>
+      {/* Floating AI Assistant Button (Mobile) */}
+      <div className="md:hidden">
+        <FloatingChatButton 
+          onClick={handleChatToggle} 
+          isActive={showChat} 
+        />
       </div>
     </>
   );
