@@ -24,7 +24,7 @@ import {
   Menu,
 } from "lucide-react";
 
-// Import our new chat components
+
 import ChatInterface from "@/components/chat/chatInterface";
 import FloatingChatButton from "@/components/chat/floatingChatButton";
 
