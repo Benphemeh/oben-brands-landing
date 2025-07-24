@@ -24,7 +24,7 @@ import {
   Menu,
 } from "lucide-react";
 
-
+// Import our new chat components
 import ChatInterface from "@/components/chat/chatInterface";
 import FloatingChatButton from "@/components/chat/floatingChatButton";
 
@@ -52,7 +52,7 @@ export default function HomePage() {
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="w-full px-4 lg:px-6 xl:px-8">
             <div className="flex h-16 items-center justify-between">
-              <div className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer">
                 <Image
                   src="/oben-logo.png"
                   alt="O'Ben Brands Logo"
@@ -63,7 +63,7 @@ export default function HomePage() {
                 <span className="text-xl font-bold text-green-700">
                   O'Ben Brands
                 </span>
-              </div>
+              </Link>
 
               {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center space-x-6">
