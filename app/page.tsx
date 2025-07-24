@@ -534,7 +534,7 @@ export default function HomePage() {
                   Ready to Experience Fresh Quality?
                 </h2>
                 <p className="max-w-[600px] text-green-100 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Get premium pork and provisions delivered fresh to your door. New customers save ₦500!
+                  Get premium pork and provisions delivered fresh to your door. New customers save up to 25% on first order!
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button 
