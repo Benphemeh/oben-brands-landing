@@ -48,99 +48,101 @@ export default function HomePage() {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        {/* Header */}
+        {/* Header - Full Width with Edge-to-Edge Layout */}
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-16 items-center justify-between px-4">
-            <div className="flex items-center space-x-2">
-              <Image
-                src="/oben-logo.png"
-                alt="O'Ben Brands Logo"
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <span className="text-xl font-bold text-green-700">
-                O'Ben Brands
-              </span>
-            </div>
+          <div className="w-full px-4 lg:px-6 xl:px-8">
+            <div className="flex h-16 items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Image
+                  src="/oben-logo.png"
+                  alt="O'Ben Brands Logo"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <span className="text-xl font-bold text-green-700">
+                  O'Ben Brands
+                </span>
+              </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link
-                href="#products"
-                className="text-sm font-medium hover:text-green-600 transition-colors"
-              >
-                Products
-              </Link>
-              <Link
-                href="#about"
-                className="text-sm font-medium hover:text-green-600 transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                href="#contact"
-                className="text-sm font-medium hover:text-green-600 transition-colors"
-              >
-                Contact
-              </Link>
-              <button
-                onClick={handleChatToggle}
-                className="text-sm font-medium hover:text-green-600 transition-colors flex items-center space-x-1 bg-green-50 hover:bg-green-100 px-3 py-2 rounded-md border border-green-200"
-              >
-                <Bot className="w-4 h-4" />
-                <span>AI Assistant</span>
-                {showChat && (
-                  <span className="text-xs bg-green-600 text-white px-1 rounded">
-                    ON
-                  </span>
-                )}
-              </button>
-            </nav>
+              {/* Desktop Navigation */}
+              <nav className="hidden md:flex items-center space-x-6">
+                <Link
+                  href="#products"
+                  className="text-sm font-medium hover:text-green-600 transition-colors"
+                >
+                  Products
+                </Link>
+                <Link
+                  href="#about"
+                  className="text-sm font-medium hover:text-green-600 transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  href="#contact"
+                  className="text-sm font-medium hover:text-green-600 transition-colors"
+                >
+                  Contact
+                </Link>
+                <button
+                  onClick={handleChatToggle}
+                  className="text-sm font-medium hover:text-green-600 transition-colors flex items-center space-x-1 bg-green-50 hover:bg-green-100 px-3 py-2 rounded-md border border-green-200"
+                >
+                  <Bot className="w-4 h-4" />
+                  <span>AI Assistant</span>
+                  {showChat && (
+                    <span className="text-xs bg-green-600 text-white px-1 rounded">
+                      ON
+                    </span>
+                  )}
+                </button>
+              </nav>
 
-            {/* Desktop Action Buttons */}
-            <div className="hidden md:flex items-center space-x-2">
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={handleWhatsAppClick}
-              >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                WhatsApp
-              </Button>
-              <Button 
-                size="sm" 
-                className="bg-green-600 hover:bg-green-700"
-                onClick={handleShopNowClick}
-              >
-                Shop Now
-              </Button>
-            </div>
+              {/* Desktop Action Buttons */}
+              <div className="hidden md:flex items-center space-x-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handleWhatsAppClick}
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  WhatsApp
+                </Button>
+                <Button 
+                  size="sm" 
+                  className="bg-green-600 hover:bg-green-700"
+                  onClick={handleShopNowClick}
+                >
+                  Shop Now
+                </Button>
+              </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center space-x-2">
-              <button
-                onClick={handleChatToggle}
-                className="text-green-600 hover:text-green-700 p-2 rounded-md border border-green-200"
-              >
-                <Bot className="w-5 h-5" />
-                {showChat && (
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full"></span>
-                )}
-              </button>
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-gray-600 hover:text-gray-700"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
+              {/* Mobile Menu Button */}
+              <div className="md:hidden flex items-center space-x-2">
+                <button
+                  onClick={handleChatToggle}
+                  className="text-green-600 hover:text-green-700 p-2 rounded-md border border-green-200"
+                >
+                  <Bot className="w-5 h-5" />
+                  {showChat && (
+                    <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full"></span>
+                  )}
+                </button>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="text-gray-600 hover:text-gray-700"
+                >
+                  <Menu className="w-6 h-6" />
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <div className="md:hidden border-t bg-white">
-              <div className="container px-4 py-4 space-y-3">
+              <div className="px-4 py-4 space-y-3 max-w-7xl mx-auto">
                 <Link
                   href="#products"
                   className="block text-sm font-medium text-gray-600 hover:text-green-600"
@@ -188,7 +190,7 @@ export default function HomePage() {
         <main className="flex-1">
           {/* Hero Section */}
           <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-br from-green-50 to-green-100">
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
                 <div className="flex flex-col justify-center space-y-4">
                   <div className="space-y-2">
@@ -237,7 +239,7 @@ export default function HomePage() {
             id="products"
             className="w-full py-12 md:py-24 lg:py-32 bg-gray-50"
           >
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
                   What We Offer
@@ -309,7 +311,7 @@ export default function HomePage() {
 
           {/* How It Works */}
           <section className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
                   How It Works
@@ -352,7 +354,7 @@ export default function HomePage() {
 
           {/* Featured Products */}
           <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
                   Featured Products
@@ -425,7 +427,7 @@ export default function HomePage() {
 
           {/* Testimonials */}
           <section className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
                   What Our Customers Say
@@ -486,7 +488,7 @@ export default function HomePage() {
 
           {/* Why Choose O'Ben */}
           <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-green-800">
                   Why Choose O'Ben Brands?
@@ -526,7 +528,7 @@ export default function HomePage() {
 
           {/* CTA Section */}
           <section className="w-full py-12 md:py-24 lg:py-32 bg-green-600 text-white">
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                   Ready to Experience Fresh Quality?
@@ -558,7 +560,7 @@ export default function HomePage() {
 
           {/* Contact & Support */}
           <section id="contact" className="w-full py-12 md:py-24 lg:py-32">
-            <div className="container px-4 md:px-6">
+            <div className="container mx-auto px-4 md:px-6">
               <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
                 <div id="about">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-green-800 mb-6">
@@ -619,50 +621,52 @@ export default function HomePage() {
 
         {/* Footer */}
         <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-gray-50">
-          <div className="flex items-center space-x-2">
-            <Image
-              src="/oben-logo.png"
-              alt="O'Ben Brands Logo"
-              width={24}
-              height={24}
-              className="rounded-full"
-            />
-            <p className="text-xs text-gray-600">
-              © {new Date().getFullYear()} O'Ben Brands. All rights reserved.
-            </p>
+          <div className="container mx-auto flex flex-col gap-2 sm:flex-row sm:items-center">
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/oben-logo.png"
+                alt="O'Ben Brands Logo"
+                width={24}
+                height={24}
+                className="rounded-full"
+              />
+              <p className="text-xs text-gray-600">
+                © {new Date().getFullYear()} O'Ben Brands. All rights reserved.
+              </p>
+            </div>
+            <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+              <Link
+                href="#products"
+                className="text-xs hover:underline underline-offset-4 text-gray-600"
+              >
+                Products
+              </Link>
+              <Link
+                href="#about"
+                className="text-xs hover:underline underline-offset-4 text-gray-600"
+              >
+                About
+              </Link>
+              <Link
+                href="#contact"
+                className="text-xs hover:underline underline-offset-4 text-gray-600"
+              >
+                Contact
+              </Link>
+              <Link
+                href="#"
+                className="text-xs hover:underline underline-offset-4 text-gray-600"
+              >
+                Terms
+              </Link>
+              <Link
+                href="#"
+                className="text-xs hover:underline underline-offset-4 text-gray-600"
+              >
+                Privacy
+              </Link>
+            </nav>
           </div>
-          <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-            <Link
-              href="#products"
-              className="text-xs hover:underline underline-offset-4 text-gray-600"
-            >
-              Products
-            </Link>
-            <Link
-              href="#about"
-              className="text-xs hover:underline underline-offset-4 text-gray-600"
-            >
-              About
-            </Link>
-            <Link
-              href="#contact"
-              className="text-xs hover:underline underline-offset-4 text-gray-600"
-            >
-              Contact
-            </Link>
-            <Link
-              href="#"
-              className="text-xs hover:underline underline-offset-4 text-gray-600"
-            >
-              Terms
-            </Link>
-            <Link
-              href="#"
-              className="text-xs hover:underline underline-offset-4 text-gray-600"
-            >
-              Privacy
-            </Link>
-          </nav>
         </footer>
       </div>
 
