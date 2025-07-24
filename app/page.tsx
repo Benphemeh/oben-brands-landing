@@ -260,11 +260,11 @@ export default function HomePage() {
                     <ul className="space-y-2">
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Premium live pigs - Large White breed (100kg) - ₦150,000</span>
+                        <span>Premium live pigs - Large White, Duroc, Hampshire & more in sizes </span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span>Fresh pork cuts - ₦3,500/kg (chops, belly, ribs & more)</span>
+                        <span>Fresh pork cuts - Sold per Kilogram (chops, belly, ribs & more)</span>
                       </li>
                       <li className="flex items-center space-x-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
@@ -399,7 +399,7 @@ export default function HomePage() {
                     <p className="text-sm text-gray-600 mb-2">
                       Chops, belly, shoulder, ribs - Vacuum sealed
                     </p>
-                    <p className="font-bold text-green-600 text-lg">₦3,500/kg</p>
+                    <p className="font-bold text-green-600 text-lg">₦5,000/kg</p>
                   </CardContent>
                 </Card>
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -607,8 +607,8 @@ export default function HomePage() {
                     <div className="mt-6 space-y-3">
                       <h3 className="font-semibold text-green-700">Physical Locations:</h3>
                       <div className="text-gray-600 space-y-2">
-                        <p><strong>Lagos:</strong> 1 Obadiah Street, Ilaje Bariga</p>
-                        <p><strong>Abeokuta:</strong> Plot 3, Boundary Estate Shoyooye</p>
+                        <p><strong>Lagos:</strong> 1 Obadiah Street, Akoka Road Lagos</p>
+                        <p><strong>Abeokuta:</strong> Plot 3, Boundary Estate Shoyooye Abeokuta</p>
                         <p><strong>Hours:</strong> Monday-Saturday, 9am-5pm</p>
                       </div>
                     </div>
