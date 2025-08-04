@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -23,8 +22,6 @@ import {
   Bot,
   Menu,
 } from "lucide-react";
-
-// Import our new chat components
 import ChatInterface from "@/components/chat/chatInterface";
 import FloatingChatButton from "@/components/chat/floatingChatButton";
 
@@ -41,7 +38,6 @@ export default function HomePage() {
   };
 
   const handleShopNowClick = () => {
-    // You can replace this with your actual shop URL or scroll to products
     document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
   };
 
