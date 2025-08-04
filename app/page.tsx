@@ -22,8 +22,6 @@ import {
   Bot,
   Menu,
 } from "lucide-react";
-
-// Import our new chat components
 import ChatInterface from "@/components/chat/chatInterface";
 import FloatingChatButton from "@/components/chat/floatingChatButton";
 
@@ -40,7 +38,6 @@ export default function HomePage() {
   };
 
   const handleShopNowClick = () => {
-    // You can replace this with your actual shop URL or scroll to products
     document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
   };
 
