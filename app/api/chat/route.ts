@@ -13,9 +13,9 @@ function getSmartMockResponse(message: string): string {
   if (lowerMessage.includes('ceo') || lowerMessage.includes('founder') || lowerMessage.includes('oluwanifemi') || lowerMessage.includes('adewole') || lowerMessage.includes('owner')) {
     return `👤 About Our CEO - Oluwanifemi Adewole:
 
-🌟 Founder & CEO of O'Ben Brands
-🚀 Passionate entrepreneur, software engineer, and community builder
-💡 Visionary transforming Africa's retail and agricultural supply chain through technology, transparency, and excellence
+The Founder & CEO of O'Ben Brands
+Adewole Oluwanifemi Ebenezer is a visionary entrepreneur, software engineer, and community builder. With a deep passion for agriculture and a commitment to transparency, he founded O'Ben Brands in 2021.
+ Visionary transforming Africa's retail and agricultural supply chain through technology, transparency, and excellence
 
 🎯 Mission: O'Ben Brands is not just a food delivery company—it's a mission-driven movement for:
 ✅ Traceable, ethical farming practices
