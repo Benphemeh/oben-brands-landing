@@ -278,7 +278,7 @@ export default function HomePage() {
                     <div className="flex items-center space-x-2">
                       <div className="text-2xl">🛍️</div>
                       <h3 className="text-2xl font-bold text-green-700">
-                        O'Ben Provision Store
+                        O'Ben Provision Stores
                       </h3>
                     </div>
                     <ul className="space-y-2">
