@@ -341,7 +341,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl font-bold">3. Fast Delivery</h3>
                   <p className="text-gray-600">
-                    Same-day delivery for orders before 12pm across Lagos & Ogun
+                    Same-day delivery for orders before 12pm across Lagos & Ogun and environs
                   </p>
                 </div>
               </div>
