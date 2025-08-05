@@ -17,13 +17,13 @@ The Founder & CEO of O'Ben Brands
 Adewole Oluwanifemi Ebenezer is a visionary entrepreneur, software engineer, and community builder. With a deep passion for agriculture and a commitment to transparency, he founded O'Ben Brands in 2021.
  Visionary transforming Africa's retail and agricultural supply chain through technology, transparency, and excellence
 
-🎯 Mission: O'Ben Brands is not just a food delivery company—it's a mission-driven movement for:
+ Mission: O'Ben Brands is not just a food delivery company—it's a mission-driven movement for:
 ✅ Traceable, ethical farming practices
 ✅ Affordable food access for all
 ✅ Sustainable commerce solutions
 ✅ Modern logistics with local food supply
 
-📍 Leading O'Ben Brands to deliver premium pork products, groceries, and daily essentials across Lagos, Ogun, and beyond with excellence and transparency.
+ Leading O'Ben Brands to deliver premium pork products, groceries, and daily essentials across Lagos, Ogun, and beyond with excellence and transparency.
 
 💬 Connect with us at +2347037983163 to experience his vision firsthand!`;
   }

@@ -278,7 +278,7 @@ export default function HomePage() {
                     <div className="flex items-center space-x-2">
                       <div className="text-2xl">🛍️</div>
                       <h3 className="text-2xl font-bold text-green-700">
-                        O'Ben Provision Store
+                        O'Ben Provision Stores
                       </h3>
                     </div>
                     <ul className="space-y-2">
@@ -341,7 +341,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl font-bold">3. Fast Delivery</h3>
                   <p className="text-gray-600">
-                    Same-day delivery for orders before 12pm across Lagos & Ogun
+                    Same-day delivery for orders before 12pm across Lagos & Ogun and environs
                   </p>
                 </div>
               </div>
